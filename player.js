@@ -28,6 +28,7 @@
         playlistWrapper.appendChild(movieItem);
         newMovieUrl.value = '';
         newMovieTitle.value = '';
+        //aaa
     }
 
     addMovieButton.addEventListener('click', (e) => {
