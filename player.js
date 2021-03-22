@@ -7,12 +7,14 @@
     let movies = Array.from(document.querySelectorAll('.movie'));
 
     const createNewMovieElement = () => {
-        const movieItem = document.createElement('li');
+        const movieItem = document.createElement('option');
         movieItem.className = 'movie';
+        console.log(movieItem.className);
         const title = document.createElement('span');
         title.setAttribute('data-video', newMovieUrl.value);
         title.textContent = newMovieTitle.value;
         title.className = 'movie_link';
+        console.log(title.className);
         movieItem.appendChild(title);
         movies.push(movieItem);
         //initializeLitenersForMovieItem(movieItem);
