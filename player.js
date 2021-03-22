@@ -93,5 +93,5 @@
 
     //movies.forEach(movie => initializeLitenersForMovieItem(movie));
 
-    reloadList();
+    //reloadList();
 })();
