@@ -11,8 +11,11 @@
         const movieItem = document.createElement('option');
         movieItem.className = 'movie';
         console.log(movieItem.className);
-        movieItem.setAttribute('value', newMovieUrl.value);
+        //movieItem.setAttribute('value', );
         movieItem.textContent = newMovieTitle.value;
+        //movieItem.onclick = function() { document.getElementById('video').setAttribute('src', newMovieUrl.value); };
+        console.log(newMovieUrl.value);
+        movieItem.onclick = function() { document.getElementById('video').setAttribute('src', newMovieUrl.value); };
         // const title = document.createElement('span');
         // title.setAttribute('data-video', newMovieUrl.value);
         // title.textContent = newMovieTitle.value;
@@ -20,7 +23,7 @@
         // console.log(title.className);
         // movieItem.appendChild(title);
         movies.push(movieItem);
-        initializeLitenersForMovieItem(movieItem);
+        //initializeLitenersForMovieItem(movieItem);
         movieItem.setAttribute('data-index', (movies.length - 1).toString());
         playlistWrapper.appendChild(movieItem);
         newMovieUrl.value = '';
@@ -94,7 +97,11 @@
         });
     }
 
-    movies.forEach(movie => initializeLitenersForMovieItem(movie));
+    //movies.forEach(movie => initializeLitenersForMovieItem(movie));
 
     //reloadList();
 })();
+
+function runVideo(link) {
+    document.getElementById('video').setAttribute('src', link)
+}

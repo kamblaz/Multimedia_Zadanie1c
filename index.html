@@ -16,8 +16,8 @@
         <div class="movies_list">
             <h2>Movies playlist</h2>
             <select class="movies_wrapper" multiple="multiple">
-                <option value = "video/3.mp4">Park</option>
-                <option value = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4">Big Buck Bunny</option>
+                <option onclick = 'runVideo("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")'>Some ad</option>
+                <option onclick = 'runVideo("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")'>Big Buck Bunny</option>
             </select>
             <button class="move_up_button">↑</button>
             <button class="move_down_button">↓</button>
@@ -40,7 +40,7 @@
             </form>
         </div>
         <div class="video_player">
-            <video id="video" muted autoplay controls width="720" src="video/3.mp4"></video>
+            <video id="video" muted autoplay controls width="720" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"></video>
         </div>
     </div>
     <script src='player.js'></script>
@@ -62,6 +62,10 @@
             console.log("Current video index", video_count)
             console.log("ended");
 
+        }
+
+        function runVideo(link) {
+            document.getElementById('video').setAttribute('src', link)
         }
     </script>
 </body>
