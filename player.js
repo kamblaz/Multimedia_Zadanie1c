@@ -6,18 +6,21 @@
     const newMovieUrl = document.querySelector('#movie_url');
     let movies = Array.from(document.querySelectorAll('.movie'));
 
+
     const createNewMovieElement = () => {
         const movieItem = document.createElement('option');
         movieItem.className = 'movie';
         console.log(movieItem.className);
-        const title = document.createElement('span');
-        title.setAttribute('data-video', newMovieUrl.value);
-        title.textContent = newMovieTitle.value;
-        title.className = 'movie_link';
-        console.log(title.className);
-        movieItem.appendChild(title);
+        movieItem.setAttribute('value', newMovieUrl.value);
+        movieItem.textContent = newMovieTitle.value;
+        // const title = document.createElement('span');
+        // title.setAttribute('data-video', newMovieUrl.value);
+        // title.textContent = newMovieTitle.value;
+        // title.className = 'movie_link';
+        // console.log(title.className);
+        // movieItem.appendChild(title);
         movies.push(movieItem);
-        //initializeLitenersForMovieItem(movieItem);
+        initializeLitenersForMovieItem(movieItem);
         movieItem.setAttribute('data-index', (movies.length - 1).toString());
         playlistWrapper.appendChild(movieItem);
         newMovieUrl.value = '';
@@ -78,9 +81,9 @@
 
     const initializeLitenersForMovieItem = (movieItem) => {
         setPlayVideoListener(movieItem);
-        setMoveUpListener(movieItem);
-        setMoveDownListener(movieItem);
-        setRemoveListener(movieItem);
+        //setMoveUpListener(movieItem);
+        //setMoveDownListener(movieItem);
+        //setRemoveListener(movieItem);
     }
 
     const reloadList = () => {
@@ -91,7 +94,7 @@
         });
     }
 
-    //movies.forEach(movie => initializeLitenersForMovieItem(movie));
+    movies.forEach(movie => initializeLitenersForMovieItem(movie));
 
     //reloadList();
 })();
