@@ -19,9 +19,9 @@
                 <option selected onclick = 'runVideo("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")'>Some ad</option>
                 <option onclick = 'runVideo("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")'>Big Buck Bunny</option>
             </select>
-            <button class="move_up_button">↑</button>
-            <button class="move_down_button">↓</button>
-            <button class="remove_button"><img src="images/minus.png"/></button>
+            <button onclick='moveUp()' class="move_up_button">↑</button>
+            <button onclick='moveDown()' class="move_down_button">↓</button>
+            <button onclick='remove()' class="remove_button"><img src="images/minus.png"/></button>
         </div>
         <div class="movie_form">
             <h2>Add movie to playlist</h2>

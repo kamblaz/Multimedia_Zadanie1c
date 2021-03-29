@@ -58,18 +58,6 @@
             videoPlayer.src = movieLink.getAttribute('data-video');
         });
     }
-    const setMoveUpListener = (movie) => movie.querySelector('.move_up_button').addEventListener('click', () => {
-        moveUp(movie);
-        reloadList()
-    });
-    const setMoveDownListener = (movie) => movie.querySelector('.move_down_button').addEventListener('click', () => {
-        moveDown(movie);
-        reloadList();
-    });
-    const setRemoveListener = (movie) => movie.querySelector('.remove_button').addEventListener('click', () => {
-        remove(movie);
-        reloadList();
-    });
 
     const initializeLitenersForMovieItem = (movieItem) => {
         setPlayVideoListener(movieItem);
@@ -138,4 +126,24 @@ function myHandler(e) {
     console.log("Current video index", current_video_index)
     console.log("Current video name", e.value)
     console.log("ended");
+}
+
+function moveUp() {
+    var selected = $("#select").find(":selected");
+    var before = selected.prev();
+    if (before.length > 0)
+        selected.detach().insertBefore(before);
+}
+
+function moveDown() {
+    var selected = $("#select").find(":selected");
+    var next = selected.next();
+    if (next.length > 0)
+        selected.detach().insertAfter(next);
+}
+
+function remove() {
+    var selected = $("#select").find(":selected");
+    console.log(selected);
+
 }
