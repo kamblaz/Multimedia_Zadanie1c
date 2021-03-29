@@ -4,22 +4,16 @@
     const addMovieButton = document.querySelector('.add_movie_button');
     const newMovieTitle = document.querySelector('#movie_title');
     const newMovieUrl = document.querySelector('#movie_url');
-    let movies = Array.from(document.querySelectorAll('.movie'));
 
 
     const createNewMovieElement = () => {
         const movieItem = document.createElement('option');
-        movieItem.className = 'movie';
-        console.log(movieItem.className);
         movieItem.textContent = newMovieTitle.value;
         var url = newMovieUrl.value;
-        movieItem.onclick = function() {
-            runVideo(url);
-            console.log(url);
-        };
-        movies.push(movieItem);
+        url = '\"'.concat(url);
+        url = url.concat('\"');
+        movieItem.setAttribute('onclick', `runVideo(${url})`);
         //initializeLitenersForMovieItem(movieItem);
-        movieItem.setAttribute('data-index', (movies.length - 1).toString());
         playlistWrapper.appendChild(movieItem);
         newMovieUrl.value = '';
         newMovieTitle.value = '';
