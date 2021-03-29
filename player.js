@@ -1,5 +1,4 @@
 (function() {
-    const videoPlayer = document.querySelector('video');
     const playlistWrapper = document.querySelector('.movies_wrapper');
     const addMovieButton = document.querySelector('.add_movie_button');
     const newMovieTitle = document.querySelector('#movie_title');
@@ -13,7 +12,6 @@
         url = '\"'.concat(url);
         url = url.concat('\"');
         movieItem.setAttribute('onclick', `runVideo(${url})`);
-        //initializeLitenersForMovieItem(movieItem);
         playlistWrapper.appendChild(movieItem);
         newMovieUrl.value = '';
         newMovieTitle.value = '';
@@ -23,60 +21,6 @@
         e.preventDefault();
         createNewMovieElement();
     })
-
-    const swapArrayElements = (arr, indexA, indexB) => [arr[indexA], arr[indexB]] = [arr[indexB], arr[indexA]];
-
-    const moveUp = (movie) => {
-        let oldIndex = Number(movie.getAttribute('data-index'));
-        if (oldIndex === 0) {
-            return void 0;
-        }
-        let newIndex = oldIndex - 1;
-        swapArrayElements(movies, oldIndex, newIndex);
-    }
-
-    const moveDown = (movie) => {
-        let oldIndex = Number(movie.getAttribute('data-index'));
-        if (oldIndex === movies.length - 1) {
-            return void 0;
-        }
-        let newIndex = oldIndex + 1;
-        swapArrayElements(movies, oldIndex, newIndex);
-    }
-
-    const remove = (movie) => {
-        const index = movie.getAttribute('data-index');
-        movies.splice(index, 1);
-        for (let i = index; i < movies.length; i++) {
-            movies[i].setAttribute('data-index', i.toString());
-        }
-    }
-
-    const setPlayVideoListener = (movie) => {
-        const movieLink = movie.querySelector('.movie_link');
-        movieLink.addEventListener('click', () => {
-            videoPlayer.src = movieLink.getAttribute('data-video');
-        });
-    }
-
-    const initializeLitenersForMovieItem = (movieItem) => {
-        setPlayVideoListener(movieItem);
-        //setMoveUpListener(movieItem);
-        //setMoveDownListener(movieItem);
-        //setRemoveListener(movieItem);
-    }
-
-    const reloadList = () => {
-        playlistWrapper.innerHTML = '';
-        movies.forEach((movieItem, idx) => {
-            movieItem.setAttribute('data-index', idx.toString());
-            playlistWrapper.appendChild(movieItem);
-        });
-    }
-
-    //movies.forEach(movie => initializeLitenersForMovieItem(movie));
-
-    //reloadList();
 })();
 
 function runVideo(link) {
@@ -122,10 +66,10 @@ function myHandler(e) {
         current_video_index = 0;
     }
     $("#video")[0].load();
-    console.log("Number of videos", lis.length)
-    console.log("Current video index", current_video_index)
-    console.log("Current video name", e.value)
-    console.log("ended");
+    // console.log("Number of videos", lis.length)
+    // console.log("Current video index", current_video_index)
+    // console.log("Current video name", e.value)
+    // console.log("ended");
 }
 
 function moveUp() {
@@ -143,7 +87,11 @@ function moveDown() {
 }
 
 function remove() {
-    var selected = $("#select").find(":selected");
-    console.log(selected);
-
+    var select = document.getElementById("select");
+    for (var i = 0; i < select.length; i++) {
+        if (select[i].selected) {
+            select.remove(i);
+            i = i - 1;
+        }
+    }
 }
