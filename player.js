@@ -44,14 +44,19 @@ current_video_index = 0;
 document.getElementById('video').addEventListener('ended', myHandler, false);
 
 function myHandler(e) {
-    var e = document.getElementsByTagName("select")[0];
+    var arr = [];
+    var e = document.getElementById("select");
     var lis = document.getElementsByTagName("option");
     for (var i = 0; i < lis.length; ++i) {
         var item = lis[i];
         if (item.value == e.value) {
             current_video_index = i;
         }
+        if (lis[i].selected) {
+            arr.push(i);
+        }
     }
+    console.log(arr);
     if (current_video_index < lis.length - 1) {
         next_video_link = removeParentheses(getParamNames(lis[current_video_index + 1].getAttribute('onclick')));
         $("#video").attr('src', next_video_link);
