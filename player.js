@@ -129,10 +129,14 @@ function myHandler(e) {
     if (current_video_index < lis.length - 1) {
         next_video_link = removeParentheses(getParamNames(lis[current_video_index + 1].getAttribute('onclick')));
         $("#video").attr('src', next_video_link);
+        var next_video_title = lis[current_video_index + 1].value;
+        $('#select').val(next_video_title);
         current_video_index += 1;
     } else {
         next_video_link = removeParentheses(getParamNames(lis[0].getAttribute('onclick')));
         $("#video").attr('src', next_video_link);
+        var next_video_title = lis[0].value;
+        $('#select').val(next_video_title);
         current_video_index = 0;
     }
     $("#video")[0].load();

@@ -15,7 +15,7 @@
     <div>
         <div class="movies_list">
             <h2>Movies playlist</h2>
-            <select class="movies_wrapper" multiple="multiple">
+            <select id="select" class="movies_wrapper" multiple="multiple">
                 <option selected onclick = 'runVideo("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")'>Some ad</option>
                 <option onclick = 'runVideo("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")'>Big Buck Bunny</option>
             </select>
@@ -45,47 +45,6 @@
     </div>
     <script src='player.js'></script>
     <script type='text/javascript'>
-        function getParamNames(func) {
-            var ARGUMENT_NAMES = /([^\s,]+)/g;
-            var result = func.slice(func.indexOf('(') + 1, func.indexOf(')')).match(ARGUMENT_NAMES);
-            if (result === null)
-                result = [];
-            return result;
-        }
-
-        function removeParentheses(string) {
-            var result = string.toString().replaceAll('\"', '');
-            return result;
-        }
-
-        current_video_index = 0;
-        document.getElementById('video').addEventListener('ended', myHandler, false);
-
-        function myHandler(e) {
-            var e = document.getElementsByTagName("select")[0];
-            var lis = document.getElementsByTagName("option");
-            for (var i = 0; i < lis.length; ++i) {
-                var item = lis[i];
-                if (item.value == e.value) {
-                    current_video_index = i;
-                }
-            }
-            var current_video_link = getParamNames(lis[current_video_index].getAttribute('onclick'))[0];
-            if (current_video_index < lis.length - 1) {
-                next_video_link = removeParentheses(getParamNames(lis[current_video_index + 1].getAttribute('onclick')));
-                $("#video").attr('src', next_video_link);
-                current_video_index += 1;
-            } else {
-                next_video_link = removeParentheses(getParamNames(lis[0].getAttribute('onclick')));
-                $("#video").attr('src', next_video_link);
-                current_video_index = 0;
-            }
-            $("#video")[0].load();
-            console.log("Number of videos", lis.length)
-            console.log("Current video index", current_video_index)
-            console.log("Current video name", e.value)
-            console.log("ended");
-        }
     </script>
 </body>
 
