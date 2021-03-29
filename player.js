@@ -11,24 +11,18 @@
         const movieItem = document.createElement('option');
         movieItem.className = 'movie';
         console.log(movieItem.className);
-        //movieItem.setAttribute('value', );
         movieItem.textContent = newMovieTitle.value;
-        //movieItem.onclick = function() { document.getElementById('video').setAttribute('src', newMovieUrl.value); };
-        console.log(newMovieUrl.value);
-        movieItem.onclick = function() { document.getElementById('video').setAttribute('src', newMovieUrl.value); };
-        // const title = document.createElement('span');
-        // title.setAttribute('data-video', newMovieUrl.value);
-        // title.textContent = newMovieTitle.value;
-        // title.className = 'movie_link';
-        // console.log(title.className);
-        // movieItem.appendChild(title);
+        var url = newMovieUrl.value;
+        movieItem.onclick = function() {
+            runVideo(url);
+            console.log(url);
+        };
         movies.push(movieItem);
         //initializeLitenersForMovieItem(movieItem);
         movieItem.setAttribute('data-index', (movies.length - 1).toString());
         playlistWrapper.appendChild(movieItem);
         newMovieUrl.value = '';
         newMovieTitle.value = '';
-        //aaa
     }
 
     addMovieButton.addEventListener('click', (e) => {
@@ -105,4 +99,45 @@
 
 function runVideo(link) {
     document.getElementById('video').setAttribute('src', link)
+}
+
+function getParamNames(func) {
+    var ARGUMENT_NAMES = /([^\s,]+)/g;
+    var result = func.slice(func.indexOf('(') + 1, func.indexOf(')')).match(ARGUMENT_NAMES);
+    if (result === null)
+        result = [];
+    return result;
+}
+
+function removeParentheses(string) {
+    var result = string.toString().replaceAll('\"', '');
+    return result;
+}
+
+current_video_index = 0;
+document.getElementById('video').addEventListener('ended', myHandler, false);
+
+function myHandler(e) {
+    var e = document.getElementsByTagName("select")[0];
+    var lis = document.getElementsByTagName("option");
+    for (var i = 0; i < lis.length; ++i) {
+        var item = lis[i];
+        if (item.value == e.value) {
+            current_video_index = i;
+        }
+    }
+    if (current_video_index < lis.length - 1) {
+        next_video_link = removeParentheses(getParamNames(lis[current_video_index + 1].getAttribute('onclick')));
+        $("#video").attr('src', next_video_link);
+        current_video_index += 1;
+    } else {
+        next_video_link = removeParentheses(getParamNames(lis[0].getAttribute('onclick')));
+        $("#video").attr('src', next_video_link);
+        current_video_index = 0;
+    }
+    $("#video")[0].load();
+    console.log("Number of videos", lis.length)
+    console.log("Current video index", current_video_index)
+    console.log("Current video name", e.value)
+    console.log("ended");
 }
